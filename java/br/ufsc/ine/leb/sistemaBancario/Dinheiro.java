@@ -2,20 +2,27 @@ package br.ufsc.ine.leb.sistemaBancario;
 
 public class Dinheiro {
 
+	private static final Integer ESCALA = 100;
+
 	private Moeda moeda;
 	private Integer inteiro;
 	private Integer fracionado;
 
-	public Dinheiro(Moeda moeda, Integer valorInteiro) {
-		this(moeda, valorInteiro, 0);
+	public Dinheiro(Moeda moeda, Integer inteiro, Integer fracionado) {
+		this.moeda = moeda;
+		this.inteiro = inteiro;
+		this.fracionado = fracionado;
+		normalizar();
 	}
 
-	public Dinheiro(Moeda moeda, Integer valorInteiro, Integer valorFracionado) {
-		Integer restoFracionado = valorFracionado % 100;
-		Integer excedenteFracionado = (valorFracionado - restoFracionado) / 100;
-		this.moeda = moeda;
-		this.inteiro = valorInteiro + excedenteFracionado;
-		this.fracionado = restoFracionado;
+	private void normalizar() {
+		Integer soma = obterQuantiaEmEscala();
+		this.inteiro = (soma - (soma % ESCALA)) / ESCALA;
+		this.fracionado = soma % ESCALA;
+	}
+
+	public Integer obterQuantiaEmEscala() {
+		return Math.abs(inteiro) * ESCALA + Math.abs(fracionado);
 	}
 
 	public String formatado() {
@@ -38,8 +45,9 @@ public class Dinheiro {
 	public boolean equals(Object objeto) {
 		if (objeto instanceof Dinheiro) {
 			Dinheiro outro = (Dinheiro) objeto;
-			Boolean iguais = moeda.equals(outro.moeda) && inteiro.equals(outro.inteiro)	&& fracionado.equals(outro.fracionado);
-			return zero() || iguais;
+			Boolean mesmaMoeda = moeda.equals(outro.moeda);
+			Boolean mesmoValor = inteiro.equals(outro.inteiro) && fracionado.equals(outro.fracionado);
+			return zero() || (mesmoValor && mesmaMoeda);
 		}
 		return super.equals(objeto);
 	}

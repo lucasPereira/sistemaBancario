@@ -11,7 +11,7 @@ public class TesteAgencia {
 
 	@Test
 	public void bancoDoBrasilTrindade() throws Exception {
-		Banco bancoDoBrasil = new Banco(0, 0);
+		Banco bancoDoBrasil = new Banco();
 		Agencia bancoDoBrasilTrindade = bancoDoBrasil.criarAgencia("Trindade");
 		assertEquals("001", bancoDoBrasilTrindade.obterIdentificador());
 		assertEquals("Trindade", bancoDoBrasilTrindade.obterNome());
@@ -19,7 +19,7 @@ public class TesteAgencia {
 
 	@Test
 	public void bancoDoBrasilPantanal() throws Exception {
-		Banco bancoDoBrasil = new Banco(0, 0);
+		Banco bancoDoBrasil = new Banco();
 		bancoDoBrasil.criarAgencia("Trindade");
 		Agencia bancoDoBrasilPantanal = bancoDoBrasil.criarAgencia("Pantanal");
 		assertEquals("002", bancoDoBrasilPantanal.obterIdentificador());

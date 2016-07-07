@@ -8,7 +8,7 @@ public class Banco {
 	private List<Conta> contas;
 	private List<Agencia> agencias;
 
-	public Banco(Integer taxaCobradaPorOperacao, Integer taxaDeJurosPagaAosCorrentistas) {
+	public Banco() {
 		contas = new LinkedList<>();
 		agencias = new LinkedList<>();
 	}
@@ -25,7 +25,7 @@ public class Banco {
 		return conta;
 	}
 
-	public Transacao depositar(Conta conta, Integer valor) {
+	public Transacao depositar(Conta conta, Dinheiro valor) {
 		return null;
 	}
 
