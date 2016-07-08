@@ -33,7 +33,7 @@ public class TesteBanco {
 		Agencia bancoDoBrasilTrindade = bancoDoBrasil.criarAgencia("Trindade");
 		Conta lucasBancoDoBrasil = bancoDoBrasil.criarConta("Lucas", bancoDoBrasilTrindade);
 		Transacao transacao = caixaEconomicaFederal.depositar(lucasBancoDoBrasil, zero);
-		assertEquals(EstadosDeTransacao.CONTA_INVALIDA, transacao.obterEstado());
+		assertEquals(EstadosDeTransacao.MOEDA_INVALIDA, transacao.obterEstado());
 		assertEquals(zero, lucasBancoDoBrasil.obterSaldo());
 	}
 
@@ -56,7 +56,7 @@ public class TesteBanco {
 		Conta lucasBancoDoBrasil = bancoDoBrasil.criarConta("Lucas", bancoDoBrasilTrindade);
 		bancoDoBrasil.depositar(lucasBancoDoBrasil, dezReais);
 		Transacao transacao = bancoDoBrasil.sacar(lucasBancoDoBrasil, 15);
-		assertEquals(EstadosDeTransacao.CONTA_INVALIDA, transacao.obterEstado());
+		assertEquals(EstadosDeTransacao.MOEDA_INVALIDA, transacao.obterEstado());
 	}
 
 	@Test
@@ -68,7 +68,7 @@ public class TesteBanco {
 		Conta lucasBancoDoBrasil = bancoDoBrasil.criarConta("Lucas", bancoDoBrasilTrindade);
 		bancoDoBrasil.depositar(lucasBancoDoBrasil, dezReais);
 		Transacao transacao = caixaEconomicaFederal.sacar(lucasBancoDoBrasil, 5);
-		assertEquals(EstadosDeTransacao.CONTA_INVALIDA, transacao.obterEstado());
+		assertEquals(EstadosDeTransacao.MOEDA_INVALIDA, transacao.obterEstado());
 	}
 
 	@Test
