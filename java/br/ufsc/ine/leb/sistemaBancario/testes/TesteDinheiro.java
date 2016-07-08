@@ -88,21 +88,18 @@ public class TesteDinheiro {
 
 	@Test
 	public void iguais() throws Exception {
-		Dinheiro zero = new Dinheiro(Moeda.BRL, 0, 0);
-		Dinheiro dezReais = new Dinheiro(Moeda.BRL, 10, 0);
-		assertEquals(dezReais, new Dinheiro(Moeda.BRL, 10, 0));
-		assertEquals(dezReais, new Dinheiro(Moeda.BRL, 10, 0));
-		assertEquals(dezReais, new Dinheiro(Moeda.BRL, 9, 100));
-		assertEquals(zero, new Dinheiro(Moeda.BRL, 0, 0));
-		assertEquals(zero, new Dinheiro(Moeda.USD, 0, 0));
+		assertEquals(new Dinheiro(Moeda.BRL, 0, 0), new Dinheiro(Moeda.BRL, 0, 0));
+		assertEquals(new Dinheiro(Moeda.BRL, 0, 0), new Dinheiro(Moeda.USD, 0, 0));
+		assertEquals(new Dinheiro(Moeda.BRL, 10, 0), new Dinheiro(Moeda.BRL, 10, 0));
+		assertEquals(new Dinheiro(Moeda.BRL, 10, 0), new Dinheiro(Moeda.BRL, 10, 0));
+		assertEquals(new Dinheiro(Moeda.BRL, 10, 0), new Dinheiro(Moeda.BRL, 9, 100));
 	}
 
 	@Test
 	public void diferentes() throws Exception {
-		Dinheiro doisReaisTrintaCentavos = new Dinheiro(Moeda.BRL, 2, 30);
-		assertNotEquals(doisReaisTrintaCentavos, new Dinheiro(Moeda.BRL, 2, 31));
-		assertNotEquals(doisReaisTrintaCentavos, new Dinheiro(Moeda.BRL, 1, 30));
-		assertNotEquals(doisReaisTrintaCentavos, new Dinheiro(Moeda.USD, 2, 30));
+		assertNotEquals(new Dinheiro(Moeda.BRL, 2, 30), new Dinheiro(Moeda.BRL, 2, 31));
+		assertNotEquals(new Dinheiro(Moeda.BRL, 2, 30), new Dinheiro(Moeda.BRL, 1, 30));
+		assertNotEquals(new Dinheiro(Moeda.BRL, 2, 30), new Dinheiro(Moeda.USD, 2, 30));
 	}
 
 }
