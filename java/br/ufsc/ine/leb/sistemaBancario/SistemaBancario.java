@@ -3,8 +3,6 @@ package br.ufsc.ine.leb.sistemaBancario;
 import java.util.LinkedList;
 import java.util.List;
 
-import br.ufsc.ine.leb.sistemaBancario.testes.Operacao;
-
 public class SistemaBancario {
 
 	private List<Banco> bancos;
