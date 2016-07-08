@@ -11,6 +11,7 @@ import br.ufsc.ine.leb.sistemaBancario.Dinheiro;
 import br.ufsc.ine.leb.sistemaBancario.Entrada;
 import br.ufsc.ine.leb.sistemaBancario.EstadosDeTransacao;
 import br.ufsc.ine.leb.sistemaBancario.Moeda;
+import br.ufsc.ine.leb.sistemaBancario.NaoRealizada;
 import br.ufsc.ine.leb.sistemaBancario.Saida;
 import br.ufsc.ine.leb.sistemaBancario.Transacao;
 import br.ufsc.ine.leb.sistemaBancario.ValorMonetario;

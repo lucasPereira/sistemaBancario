@@ -1,7 +1,4 @@
-package br.ufsc.ine.leb.sistemaBancario.testes;
-
-import br.ufsc.ine.leb.sistemaBancario.EstadosDeTransacao;
-import br.ufsc.ine.leb.sistemaBancario.Transacao;
+package br.ufsc.ine.leb.sistemaBancario;
 
 public class NaoRealizada extends Transacao {
 
