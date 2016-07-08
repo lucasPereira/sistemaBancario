@@ -1,6 +1,6 @@
 package br.ufsc.ine.leb.sistemaBancario;
 
-public enum EstadosDeTransacao {
+public enum EstadosDeOperacao {
 
 	SUCESSO, SALDO_INSUFICIENTE, MOEDA_INVALIDA
 

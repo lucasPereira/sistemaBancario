@@ -10,6 +10,14 @@ import br.ufsc.ine.leb.sistemaBancario.Moeda;
 public class TesteDinheiro {
 
 	@Test
+	public void zero() throws Exception {
+		Dinheiro zeroReais = new Dinheiro(Moeda.BRL, 0, 0);
+		assertEquals("0,00", zeroReais.formatado());
+		assertEquals(0, zeroReais.obterQuantiaEmEscala().intValue());
+		assertEquals(Moeda.BRL, zeroReais.obterMoeda());
+	}
+
+	@Test
 	public void inteiroDezFracionadoZero() throws Exception {
 		Dinheiro dezReais = new Dinheiro(Moeda.BRL, 10, 0);
 		assertEquals("10,00 BRL", dezReais.formatado());
@@ -87,14 +95,6 @@ public class TesteDinheiro {
 		assertEquals("3,50 BRL", tresReaisCinquentaCentavos.formatado());
 		assertEquals(350, tresReaisCinquentaCentavos.obterQuantiaEmEscala().intValue());
 		assertEquals(Moeda.BRL, tresReaisCinquentaCentavos.obterMoeda());
-	}
-
-	@Test
-	public void zero() throws Exception {
-		Dinheiro zeroReais = new Dinheiro(Moeda.BRL, 0, 0);
-		assertEquals("0,00", zeroReais.formatado());
-		assertEquals(0, zeroReais.obterQuantiaEmEscala().intValue());
-		assertEquals(Moeda.BRL, zeroReais.obterMoeda());
 	}
 
 	@Test

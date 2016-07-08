@@ -8,10 +8,9 @@ import br.ufsc.ine.leb.sistemaBancario.Agencia;
 import br.ufsc.ine.leb.sistemaBancario.Banco;
 import br.ufsc.ine.leb.sistemaBancario.Conta;
 import br.ufsc.ine.leb.sistemaBancario.Dinheiro;
-import br.ufsc.ine.leb.sistemaBancario.EstadosDeTransacao;
+import br.ufsc.ine.leb.sistemaBancario.EstadosDeOperacao;
 import br.ufsc.ine.leb.sistemaBancario.Moeda;
 import br.ufsc.ine.leb.sistemaBancario.SistemaBancario;
-import br.ufsc.ine.leb.sistemaBancario.Transacao;
 import br.ufsc.ine.leb.sistemaBancario.ValorMonetario;
 
 public class TesteSistemaBancario {
@@ -24,44 +23,54 @@ public class TesteSistemaBancario {
 		Banco bancoDoBrasil = sistemaBancario.criarBanco(Moeda.BRL);
 		Agencia bancoDoBrasilTrindade = bancoDoBrasil.criarAgencia("Trindade");
 		Conta lucasBancoDoBrasil = bancoDoBrasilTrindade.criarConta("Lucas");
-		Transacao transacao = sistemaBancario.depositar(lucasBancoDoBrasil, dezReais);
-		assertEquals(EstadosDeTransacao.SUCESSO, transacao.obterEstado());
+		Operacao operacao = sistemaBancario.depositar(lucasBancoDoBrasil, dezReais);
+		assertEquals(EstadosDeOperacao.SUCESSO, operacao.obterEstado());
 		assertEquals(positivoDezReais, lucasBancoDoBrasil.calcularSaldo());
 	}
 
 	@Test
-	public void sacarComSaldo() throws Exception {
+	public void sacar() throws Exception {
 		Dinheiro dezReais = new Dinheiro(Moeda.BRL, 10, 0);
+		Dinheiro cincoReais = new Dinheiro(Moeda.BRL, 5, 0);
+		ValorMonetario positivoCincoReais = new ValorMonetario(Moeda.BRL).somar(cincoReais);
 		SistemaBancario sistemaBancario = new SistemaBancario();
 		Banco bancoDoBrasil = sistemaBancario.criarBanco(Moeda.BRL);
 		Agencia bancoDoBrasilTrindade = bancoDoBrasil.criarAgencia("Trindade");
 		Conta lucasBancoDoBrasil = bancoDoBrasilTrindade.criarConta("Lucas");
 		sistemaBancario.depositar(lucasBancoDoBrasil, dezReais);
-		Transacao transacao = sistemaBancario.sacar(lucasBancoDoBrasil, 5);
-		assertEquals(EstadosDeTransacao.SUCESSO, transacao.obterEstado());
+		Operacao operacao = sistemaBancario.sacar(lucasBancoDoBrasil, cincoReais);
+		assertEquals(EstadosDeOperacao.SUCESSO, operacao.obterEstado());
+		assertEquals(positivoCincoReais, lucasBancoDoBrasil.calcularSaldo());
 	}
 
 	@Test
 	public void sacarSemSaldo() throws Exception {
 		Dinheiro dezReais = new Dinheiro(Moeda.BRL, 10, 0);
+		ValorMonetario positivoZeroReais = new ValorMonetario(Moeda.BRL);
 		SistemaBancario sistemaBancario = new SistemaBancario();
 		Banco bancoDoBrasil = sistemaBancario.criarBanco(Moeda.BRL);
 		Agencia bancoDoBrasilTrindade = bancoDoBrasil.criarAgencia("Trindade");
 		Conta lucasBancoDoBrasil = bancoDoBrasilTrindade.criarConta("Lucas");
-		sistemaBancario.depositar(lucasBancoDoBrasil, dezReais);
-		Transacao transacao = sistemaBancario.sacar(lucasBancoDoBrasil, 15);
-		assertEquals(EstadosDeTransacao.MOEDA_INVALIDA, transacao.obterEstado());
+		Operacao operacao = sistemaBancario.sacar(lucasBancoDoBrasil, dezReais);
+		assertEquals(EstadosDeOperacao.SALDO_INSUFICIENTE, operacao.obterEstado());
+		assertEquals(positivoZeroReais, lucasBancoDoBrasil.calcularSaldo());
 	}
 
 	@Test
 	public void transferir() throws Exception {
+		Dinheiro dezReais = new Dinheiro(Moeda.BRL, 10, 0);
+		Dinheiro cincoReais = new Dinheiro(Moeda.BRL, 5, 0);
+		ValorMonetario positivoCincoReais = new ValorMonetario(Moeda.BRL).somar(cincoReais);
 		SistemaBancario sistemaBancario = new SistemaBancario();
 		Banco bancoDoBrasil = sistemaBancario.criarBanco(Moeda.BRL);
 		Agencia bancoDoBrasilTrindade = bancoDoBrasil.criarAgencia("Trindade");
 		Conta lucasBancoDoBrasil = bancoDoBrasilTrindade.criarConta("Lucas");
 		Conta patriciaBancoDoBrasil = bancoDoBrasilTrindade.criarConta("Patrícia");
-		Transacao transacao = sistemaBancario.transferir(patriciaBancoDoBrasil, lucasBancoDoBrasil, 15);
-		assertEquals(EstadosDeTransacao.SUCESSO, transacao.obterEstado());
+		sistemaBancario.depositar(lucasBancoDoBrasil, dezReais);
+		Operacao operacao = sistemaBancario.transferir(lucasBancoDoBrasil, patriciaBancoDoBrasil, cincoReais);
+		assertEquals(EstadosDeOperacao.SUCESSO, operacao.obterEstado());
+		assertEquals(positivoCincoReais, lucasBancoDoBrasil.calcularSaldo());
+		assertEquals(positivoCincoReais, patriciaBancoDoBrasil.calcularSaldo());
 	}
 
 }

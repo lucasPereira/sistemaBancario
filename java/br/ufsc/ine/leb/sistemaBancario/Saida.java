@@ -9,11 +9,6 @@ public class Saida implements Transacao {
 	}
 
 	@Override
-	public EstadosDeTransacao obterEstado() {
-		return EstadosDeTransacao.SUCESSO;
-	}
-
-	@Override
 	public ValorMonetario obterValorMonetario() {
 		return new ValorMonetario(quantia.obterMoeda()).subtrair(quantia);
 	}

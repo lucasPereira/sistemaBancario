@@ -4,8 +4,6 @@ public interface Transacao {
 
 	public ValorMonetario obterValorMonetario();
 
-	public EstadosDeTransacao obterEstado();
-
-	public ValorMonetario contabilizar(ValorMonetario positivoZeroReais);
+	public ValorMonetario contabilizar(ValorMonetario saldo);
 
 }

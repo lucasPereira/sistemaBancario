@@ -1,6 +1,6 @@
 package br.ufsc.ine.leb.sistemaBancario.testes;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
@@ -9,7 +9,6 @@ import br.ufsc.ine.leb.sistemaBancario.Banco;
 import br.ufsc.ine.leb.sistemaBancario.Conta;
 import br.ufsc.ine.leb.sistemaBancario.Dinheiro;
 import br.ufsc.ine.leb.sistemaBancario.Entrada;
-import br.ufsc.ine.leb.sistemaBancario.EstadosDeTransacao;
 import br.ufsc.ine.leb.sistemaBancario.Moeda;
 import br.ufsc.ine.leb.sistemaBancario.NaoRealizada;
 import br.ufsc.ine.leb.sistemaBancario.Saida;
@@ -29,11 +28,10 @@ public class TesteTransacao {
 		Agencia bancoDoBrasilTrindade = bancoDoBrasil.criarAgencia("Trindade");
 		Conta lucasBancoDoBrasil = bancoDoBrasilTrindade.criarConta("Lucas");
 		Transacao transacao = new Entrada(lucasBancoDoBrasil, dezReais);
-		assertEquals(EstadosDeTransacao.SUCESSO, transacao.obterEstado());
 		assertEquals(positivoDezReais, transacao.obterValorMonetario());
 		assertEquals(positivoDezReais, transacao.contabilizar(positivoZeroReais));
 	}
-	
+
 	@Test
 	public void saida() throws Exception {
 		Dinheiro dezReais = new Dinheiro(Moeda.BRL, 10, 0);
@@ -44,7 +42,6 @@ public class TesteTransacao {
 		Agencia bancoDoBrasilTrindade = bancoDoBrasil.criarAgencia("Trindade");
 		Conta lucasBancoDoBrasil = bancoDoBrasilTrindade.criarConta("Lucas");
 		Transacao transacao = new Saida(lucasBancoDoBrasil, dezReais);
-		assertEquals(EstadosDeTransacao.SUCESSO, transacao.obterEstado());
 		assertEquals(negativoDezReais, transacao.obterValorMonetario());
 		assertEquals(negativoDezReais, transacao.contabilizar(positivoZeroReais));
 	}
@@ -57,8 +54,7 @@ public class TesteTransacao {
 		Banco bancoDoBrasil = sistemaBancario.criarBanco(Moeda.BRL);
 		Agencia bancoDoBrasilTrindade = bancoDoBrasil.criarAgencia("Trindade");
 		Conta lucasBancoDoBrasil = bancoDoBrasilTrindade.criarConta("Lucas");
-		Transacao transacao = new NaoRealizada(EstadosDeTransacao.SALDO_INSUFICIENTE, new Saida(lucasBancoDoBrasil, dezReais));
-		assertEquals(EstadosDeTransacao.SALDO_INSUFICIENTE, transacao.obterEstado());
+		Transacao transacao = new NaoRealizada(new Saida(lucasBancoDoBrasil, dezReais));
 		assertEquals(negativoDezReais, transacao.obterValorMonetario());
 		assertEquals(negativoDezReais, transacao.contabilizar(negativoDezReais));
 	}

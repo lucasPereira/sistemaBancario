@@ -9,11 +9,6 @@ public class Entrada implements Transacao {
 	}
 
 	@Override
-	public EstadosDeTransacao obterEstado() {
-		return EstadosDeTransacao.SUCESSO;
-	}
-
-	@Override
 	public ValorMonetario obterValorMonetario() {
 		return new ValorMonetario(quantia.obterMoeda()).somar(quantia);
 	}
