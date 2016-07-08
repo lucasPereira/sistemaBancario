@@ -1,14 +1,26 @@
 package br.ufsc.ine.leb.sistemaBancario;
 
-public class Entrada extends Transacao {
+public class Entrada implements Transacao {
 
-	public Entrada(Banco origem, Conta destino, Moeda moeda, Dinheiro quantia) {
-		super(origem, destino, new ValorMonetario(moeda).somar(quantia));
+	private Dinheiro quantia;
+
+	public Entrada(Conta conta, Dinheiro quantia) {
+		this.quantia = quantia;
 	}
 
 	@Override
 	public EstadosDeTransacao obterEstado() {
 		return EstadosDeTransacao.SUCESSO;
+	}
+
+	@Override
+	public ValorMonetario obterValorMonetario() {
+		return new ValorMonetario(quantia.obterMoeda()).somar(quantia);
+	}
+
+	@Override
+	public ValorMonetario contabilizar(ValorMonetario saldo) {
+		return saldo.somar(quantia);
 	}
 
 }

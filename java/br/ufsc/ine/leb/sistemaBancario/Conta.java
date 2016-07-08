@@ -1,13 +1,20 @@
 package br.ufsc.ine.leb.sistemaBancario;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Conta {
 
 	private String titular;
 	private Integer codigo;
+	private Agencia agencia;
+	private List<Transacao> transacoes;
 
-	public Conta(String titular, Integer codigo, Agencia agencia) {
+	protected Conta(String titular, Integer codigo, Agencia agencia) {
 		this.titular = titular;
 		this.codigo = codigo;
+		this.agencia = agencia;
+		this.transacoes = new LinkedList<>();
 	}
 
 	public String obterIdentificador() {
@@ -18,8 +25,20 @@ public class Conta {
 		return titular;
 	}
 
-	public Dinheiro obterSaldo() {
-		return new Dinheiro(Moeda.BRL, 0, 0);
+	public Agencia obterAgencia() {
+		return agencia;
+	}
+
+	public ValorMonetario calcularSaldo() {
+		ValorMonetario saldo = obterAgencia().obterBanco().construirValorMonetario();
+		for (Transacao transacao : transacoes) {
+			saldo = transacao.contabilizar(saldo);
+		}
+		return saldo;
+	}
+
+	public void adicionarTransacao(Transacao transacao) {
+		transacoes.add(transacao);
 	}
 
 }

@@ -55,4 +55,8 @@ public class ValorMonetario {
 		return super.equals(objeto);
 	}
 
+	@Override
+	public String toString() {
+		return formatado();
+	}
 }

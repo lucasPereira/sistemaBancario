@@ -14,6 +14,7 @@ public class TesteDinheiro {
 		Dinheiro dezReais = new Dinheiro(Moeda.BRL, 10, 0);
 		assertEquals("10,00 BRL", dezReais.formatado());
 		assertEquals(1000, dezReais.obterQuantiaEmEscala().intValue());
+		assertEquals(Moeda.BRL, dezReais.obterMoeda());
 	}
 
 	@Test
@@ -21,6 +22,7 @@ public class TesteDinheiro {
 		Dinheiro umRealNovamentaNoveCentavos = new Dinheiro(Moeda.BRL, 1, 99);
 		assertEquals("1,99 BRL", umRealNovamentaNoveCentavos.formatado());
 		assertEquals(199, umRealNovamentaNoveCentavos.obterQuantiaEmEscala().intValue());
+		assertEquals(Moeda.BRL, umRealNovamentaNoveCentavos.obterMoeda());
 	}
 
 	@Test
@@ -28,6 +30,7 @@ public class TesteDinheiro {
 		Dinheiro cinquentaSeisReaisCinquentaCentavos = new Dinheiro(Moeda.BRL, 55, 150);
 		assertEquals("56,50 BRL", cinquentaSeisReaisCinquentaCentavos.formatado());
 		assertEquals(5650, cinquentaSeisReaisCinquentaCentavos.obterQuantiaEmEscala().intValue());
+		assertEquals(Moeda.BRL, cinquentaSeisReaisCinquentaCentavos.obterMoeda());
 	}
 
 	@Test
@@ -35,6 +38,7 @@ public class TesteDinheiro {
 		Dinheiro doisReaisTrintaCentavos = new Dinheiro(Moeda.BRL, 0, 230);
 		assertEquals("2,30 BRL", doisReaisTrintaCentavos.formatado());
 		assertEquals(230, doisReaisTrintaCentavos.obterQuantiaEmEscala().intValue());
+		assertEquals(Moeda.BRL, doisReaisTrintaCentavos.obterMoeda());
 	}
 
 	@Test
@@ -42,6 +46,7 @@ public class TesteDinheiro {
 		Dinheiro oitoReaisCinquentaCentavos = new Dinheiro(Moeda.BRL, -7, 150);
 		assertEquals("8,50 BRL", oitoReaisCinquentaCentavos.formatado());
 		assertEquals(850, oitoReaisCinquentaCentavos.obterQuantiaEmEscala().intValue());
+		assertEquals(Moeda.BRL, oitoReaisCinquentaCentavos.obterMoeda());
 	}
 
 	@Test
@@ -49,6 +54,7 @@ public class TesteDinheiro {
 		Dinheiro oitoReaisCinquentaCentavos = new Dinheiro(Moeda.BRL, -7, -150);
 		assertEquals("8,50 BRL", oitoReaisCinquentaCentavos.formatado());
 		assertEquals(850, oitoReaisCinquentaCentavos.obterQuantiaEmEscala().intValue());
+		assertEquals(Moeda.BRL, oitoReaisCinquentaCentavos.obterMoeda());
 	}
 
 	@Test
@@ -56,6 +62,7 @@ public class TesteDinheiro {
 		Dinheiro oitoReaisCinquentaCentavos = new Dinheiro(Moeda.BRL, 7, -150);
 		assertEquals("8,50 BRL", oitoReaisCinquentaCentavos.formatado());
 		assertEquals(850, oitoReaisCinquentaCentavos.obterQuantiaEmEscala().intValue());
+		assertEquals(Moeda.BRL, oitoReaisCinquentaCentavos.obterMoeda());
 	}
 
 	@Test
@@ -63,6 +70,7 @@ public class TesteDinheiro {
 		Dinheiro tresReaiscinquentaCentavos = new Dinheiro(Moeda.BRL, -2, 150);
 		assertEquals("3,50 BRL", tresReaiscinquentaCentavos.formatado());
 		assertEquals(350, tresReaiscinquentaCentavos.obterQuantiaEmEscala().intValue());
+		assertEquals(Moeda.BRL, tresReaiscinquentaCentavos.obterMoeda());
 	}
 
 	@Test
@@ -70,6 +78,7 @@ public class TesteDinheiro {
 		Dinheiro tresReaisCinquentaCentavos = new Dinheiro(Moeda.BRL, -2, -150);
 		assertEquals("3,50 BRL", tresReaisCinquentaCentavos.formatado());
 		assertEquals(350, tresReaisCinquentaCentavos.obterQuantiaEmEscala().intValue());
+		assertEquals(Moeda.BRL, tresReaisCinquentaCentavos.obterMoeda());
 	}
 
 	@Test
@@ -77,13 +86,15 @@ public class TesteDinheiro {
 		Dinheiro tresReaisCinquentaCentavos = new Dinheiro(Moeda.BRL, 2, -150);
 		assertEquals("3,50 BRL", tresReaisCinquentaCentavos.formatado());
 		assertEquals(350, tresReaisCinquentaCentavos.obterQuantiaEmEscala().intValue());
+		assertEquals(Moeda.BRL, tresReaisCinquentaCentavos.obterMoeda());
 	}
 
 	@Test
 	public void zero() throws Exception {
-		Dinheiro zero = new Dinheiro(Moeda.BRL, 0, 0);
-		assertEquals("0,00", zero.formatado());
-		assertEquals(0, zero.obterQuantiaEmEscala().intValue());
+		Dinheiro zeroReais = new Dinheiro(Moeda.BRL, 0, 0);
+		assertEquals("0,00", zeroReais.formatado());
+		assertEquals(0, zeroReais.obterQuantiaEmEscala().intValue());
+		assertEquals(Moeda.BRL, zeroReais.obterMoeda());
 	}
 
 	@Test

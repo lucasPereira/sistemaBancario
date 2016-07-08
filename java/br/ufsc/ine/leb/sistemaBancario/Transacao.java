@@ -1,21 +1,11 @@
 package br.ufsc.ine.leb.sistemaBancario;
 
-public abstract class Transacao {
+public interface Transacao {
 
-	private ValorMonetario valor;
+	public ValorMonetario obterValorMonetario();
 
-	public Transacao(Banco origem, Conta destino, ValorMonetario valor) {
-		this.valor = valor;
-	}
+	public EstadosDeTransacao obterEstado();
 
-	public Transacao(Transacao transacao) {
-		this.valor = transacao.valor;
-	}
-
-	public ValorMonetario obterValorMonetario() {
-		return valor;
-	}
-
-	public abstract EstadosDeTransacao obterEstado();
+	public ValorMonetario contabilizar(ValorMonetario positivoZeroReais);
 
 }

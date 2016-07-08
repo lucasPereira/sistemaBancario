@@ -5,36 +5,26 @@ import java.util.List;
 
 public class Banco {
 
-	private List<Conta> contas;
+	private Moeda moeda;
 	private List<Agencia> agencias;
 
-	public Banco() {
-		contas = new LinkedList<>();
-		agencias = new LinkedList<>();
+	protected Banco(Moeda moeda) {
+		this.moeda = moeda;
+		this.agencias = new LinkedList<>();
 	}
 
 	public Agencia criarAgencia(String nome) {
-		Agencia agencia = new Agencia(nome, agencias.size() + 1);
+		Agencia agencia = new Agencia(nome, agencias.size() + 1, this);
 		agencias.add(agencia);
 		return agencia;
 	}
 
-	public Conta criarConta(String titular, Agencia agencia) {
-		Conta conta = new Conta(titular, contas.size() + 1, agencia);
-		contas.add(conta);
-		return conta;
+	public Boolean aceitaMoeda(Moeda outraMoeda) {
+		return moeda.equals(outraMoeda);
 	}
 
-	public Transacao depositar(Conta conta, Dinheiro valor) {
-		return null;
-	}
-
-	public Transacao sacar(Conta conta, Integer valor) {
-		return null;
-	}
-
-	public Transacao transferir(Conta origem, Conta destino, Integer valor) {
-		return null;
+	public ValorMonetario construirValorMonetario() {
+		return new ValorMonetario(moeda);
 	}
 
 }

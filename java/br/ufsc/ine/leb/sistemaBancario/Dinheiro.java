@@ -25,6 +25,10 @@ public class Dinheiro {
 		return Math.abs(inteiro) * ESCALA + Math.abs(fracionado);
 	}
 
+	public Moeda obterMoeda() {
+		return moeda;
+	}
+
 	public String formatado() {
 		return zero() ? formatarSemMoeda() : formatarComMoeda();
 	}
@@ -52,4 +56,8 @@ public class Dinheiro {
 		return super.equals(objeto);
 	}
 
+	@Override
+	public String toString() {
+		return formatado();
+	}
 }

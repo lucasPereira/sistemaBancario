@@ -12,10 +12,10 @@ public class TesteValorMonetario {
 
 	@Test
 	public void zero() throws Exception {
-		Dinheiro zero = new Dinheiro(Moeda.BRL, 0, 0);
+		Dinheiro zeroReais = new Dinheiro(Moeda.BRL, 0, 0);
 		ValorMonetario valor = new ValorMonetario(Moeda.BRL);
 		assertTrue(valor.positivo());
-		assertEquals(zero, valor.obterQuantia());
+		assertEquals(zeroReais, valor.obterQuantia());
 		assertEquals("+0,00", valor.formatado());
 	}
 
