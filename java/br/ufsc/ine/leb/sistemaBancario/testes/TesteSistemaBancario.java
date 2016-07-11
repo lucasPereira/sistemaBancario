@@ -134,12 +134,12 @@ public class TesteSistemaBancario {
 		Agencia bancoDoBrasilTrindade = bancoDoBrasil.criarAgencia("Trindade");
 		Agencia caixaEconomicaFederalTrindade = caixaEconomicaFederal.criarAgencia("Trindade");
 		Conta lucasBancoDoBrasil = bancoDoBrasilTrindade.criarConta("Lucas");
-		Conta patriciaBancoDoBrasil = caixaEconomicaFederalTrindade.criarConta("Patrícia");
+		Conta patriciaCaixaEconomicaFederal = caixaEconomicaFederalTrindade.criarConta("Patrícia");
 		sistemaBancario.depositar(lucasBancoDoBrasil, dezReais);
-		Operacao operacao = sistemaBancario.transferir(lucasBancoDoBrasil, patriciaBancoDoBrasil, cincoReais);
+		Operacao operacao = sistemaBancario.transferir(lucasBancoDoBrasil, patriciaCaixaEconomicaFederal, cincoReais);
 		assertEquals(EstadosDeOperacao.MOEDA_INVALIDA, operacao.obterEstado());
 		assertEquals(positivoDezReais, lucasBancoDoBrasil.calcularSaldo());
-		assertEquals(positivoZeroDolares, patriciaBancoDoBrasil.calcularSaldo());
+		assertEquals(positivoZeroDolares, patriciaCaixaEconomicaFederal.calcularSaldo());
 	}
-
+	
 }
