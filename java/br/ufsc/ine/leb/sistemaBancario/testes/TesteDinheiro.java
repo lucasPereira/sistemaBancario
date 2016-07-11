@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import br.ufsc.ine.leb.sistemaBancario.Dinheiro;
 import br.ufsc.ine.leb.sistemaBancario.Moeda;
+import br.ufsc.ine.leb.sistemaBancario.ValorMonetario;
 
 public class TesteDinheiro {
 
@@ -95,6 +96,22 @@ public class TesteDinheiro {
 		assertEquals("3,50 BRL", tresReaisCinquentaCentavos.formatado());
 		assertEquals(350, tresReaisCinquentaCentavos.obterQuantiaEmEscala().intValue());
 		assertEquals(Moeda.BRL, tresReaisCinquentaCentavos.obterMoeda());
+	}
+
+	@Test
+	public void comoValorMonetarioPositivo() throws Exception {
+		Dinheiro dezReais = new Dinheiro(Moeda.BRL, 10, 0);
+		ValorMonetario positivoDezReais = dezReais.valorMonetarioPositivo();
+		assertFalse(positivoDezReais.negativo());
+		assertEquals(dezReais, positivoDezReais.obterQuantia());
+	}
+
+	@Test
+	public void comoValorMonetarioNegativo() throws Exception {
+		Dinheiro dezReais = new Dinheiro(Moeda.BRL, 10, 0);
+		ValorMonetario negativoDezReais = dezReais.valorMonetarioNegativo();
+		assertTrue(negativoDezReais.negativo());
+		assertEquals(dezReais, negativoDezReais.obterQuantia());
 	}
 
 	@Test

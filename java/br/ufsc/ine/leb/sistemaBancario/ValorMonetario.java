@@ -16,16 +16,40 @@ public class ValorMonetario {
 		this.quantia = new Dinheiro(moeda, 0, valor);
 	}
 
+	public ValorMonetario somar(Dinheiro quantiaSomada) {
+		validarMoeda(quantiaSomada);
+		Integer valor = quantia.obterQuantiaEmEscala() * sinal + quantiaSomada.obterQuantiaEmEscala();
+		return new ValorMonetario(moeda, valor);
+	}
+
+	public ValorMonetario subtrair(Dinheiro quantiaSubtraida) {
+		validarMoeda(quantiaSubtraida);
+		Integer valor = quantia.obterQuantiaEmEscala() * sinal - quantiaSubtraida.obterQuantiaEmEscala();
+		return new ValorMonetario(moeda, valor);
+	}
+
 	public Dinheiro obterQuantia() {
 		return quantia;
 	}
 
-	public Boolean positivo() {
-		return sinal >= 0;
+	public Boolean negativo() {
+		return sinal < 0;
 	}
 
 	public String formatado() {
-		return positivo() ? formatarPositivo() : formatarNegativo();
+		return zero() ? formatarSemSinal() : formatarComSinal();
+	}
+
+	public String formatarComSinal() {
+		return negativo() ? formatarNegativo() : formatarPositivo();
+	}
+
+	public String formatarSemSinal() {
+		return String.format("%s", quantia.formatado());
+	}
+
+	private Boolean zero() {
+		return quantia.obterQuantiaEmEscala() == 0;
 	}
 
 	private String formatarPositivo() {
@@ -36,21 +60,19 @@ public class ValorMonetario {
 		return String.format("-%s", quantia.formatado());
 	}
 
-	public ValorMonetario somar(Dinheiro quantiaSomada) {
-		Integer valor = quantia.obterQuantiaEmEscala() * sinal + quantiaSomada.obterQuantiaEmEscala();
-		return new ValorMonetario(moeda, valor);
-	}
-
-	public ValorMonetario subtrair(Dinheiro quantiaSubtraida) {
-		Integer valor = quantia.obterQuantiaEmEscala() * sinal - quantiaSubtraida.obterQuantiaEmEscala();
-		return new ValorMonetario(moeda, valor);
+	private void validarMoeda(Dinheiro quantiaSomada) {
+		if (!moeda.equals(quantiaSomada.obterMoeda())) {
+			throw new UnsupportedOperationException();
+		}
 	}
 
 	@Override
 	public boolean equals(Object objeto) {
 		if (objeto instanceof ValorMonetario) {
 			ValorMonetario outro = (ValorMonetario) objeto;
-			return sinal.equals(outro.sinal) && quantia.equals(outro.quantia) && moeda.equals(outro.moeda);
+			Boolean iguaisZero = zero() && outro.zero();
+			Boolean iguaisComMesmaMoeda = sinal.equals(outro.sinal) && quantia.equals(outro.quantia) && moeda.equals(outro.moeda);
+			return iguaisZero || iguaisComMesmaMoeda;
 		}
 		return super.equals(objeto);
 	}
@@ -59,4 +81,5 @@ public class ValorMonetario {
 	public String toString() {
 		return formatado();
 	}
+
 }

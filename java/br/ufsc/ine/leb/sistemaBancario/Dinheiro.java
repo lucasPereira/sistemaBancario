@@ -2,8 +2,6 @@ package br.ufsc.ine.leb.sistemaBancario;
 
 public class Dinheiro {
 
-	private static final Integer ESCALA = 100;
-
 	private Moeda moeda;
 	private Integer inteiro;
 	private Integer fracionado;
@@ -17,12 +15,13 @@ public class Dinheiro {
 
 	private void normalizar() {
 		Integer soma = obterQuantiaEmEscala();
-		this.inteiro = (soma - (soma % ESCALA)) / ESCALA;
-		this.fracionado = soma % ESCALA;
+		Integer baseFracionaria = moeda.obterBaseFracionaria();
+		this.inteiro = (soma - (soma % baseFracionaria)) / baseFracionaria;
+		this.fracionado = soma % baseFracionaria;
 	}
 
 	public Integer obterQuantiaEmEscala() {
-		return Math.abs(inteiro) * ESCALA + Math.abs(fracionado);
+		return Math.abs(inteiro) * moeda.obterBaseFracionaria() + Math.abs(fracionado);
 	}
 
 	public Moeda obterMoeda() {
@@ -45,6 +44,14 @@ public class Dinheiro {
 		return inteiro == 0 && fracionado == 0;
 	}
 
+	public ValorMonetario valorMonetarioPositivo() {
+		return new ValorMonetario(moeda).somar(this);
+	}
+
+	public ValorMonetario valorMonetarioNegativo() {
+		return new ValorMonetario(moeda).subtrair(this);
+	}
+
 	@Override
 	public boolean equals(Object objeto) {
 		if (objeto instanceof Dinheiro) {
@@ -60,4 +67,5 @@ public class Dinheiro {
 	public String toString() {
 		return formatado();
 	}
+
 }

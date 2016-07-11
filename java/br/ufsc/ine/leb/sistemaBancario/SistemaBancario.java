@@ -32,7 +32,7 @@ public class SistemaBancario {
 		ValorMonetario saldo = conta.calcularSaldo();
 		Transacao saida = new Saida(conta, quantia);
 		EstadosDeOperacao estado = EstadosDeOperacao.SUCESSO;
-		if (!saldo.positivo() || saldo.obterQuantia().obterQuantiaEmEscala() < quantia.obterQuantiaEmEscala()) {
+		if (saldo.negativo() || saldoFicaraNegativo(saldo, quantia)) {
 			saida = new NaoRealizada(saida);
 			estado = EstadosDeOperacao.SALDO_INSUFICIENTE;
 		}
@@ -56,6 +56,10 @@ public class SistemaBancario {
 		origem.adicionarTransacao(saida);
 		destino.adicionarTransacao(entrada);
 		return new Operacao(estado, saida, entrada);
+	}
+	
+	private boolean saldoFicaraNegativo(ValorMonetario saldo, Dinheiro quantia) {
+		return saldo.obterQuantia().obterQuantiaEmEscala() < quantia.obterQuantiaEmEscala();
 	}
 
 	private boolean moedaInvalida(Conta conta, Dinheiro quantia) {

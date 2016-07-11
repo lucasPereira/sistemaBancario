@@ -22,14 +22,24 @@ public class TesteAgencia {
 	}
 
 	@Test
-	public void bancoDoBrasilPantanal() throws Exception {
+	public void bancoDoBrasilCentro() throws Exception {
 		SistemaBancario sistemaBancario = new SistemaBancario();
 		Banco bancoDoBrasil = sistemaBancario.criarBanco(Moeda.BRL);
 		bancoDoBrasil.criarAgencia("Trindade");
-		Agencia bancoDoBrasilPantanal = bancoDoBrasil.criarAgencia("Pantanal");
+		Agencia bancoDoBrasilPantanal = bancoDoBrasil.criarAgencia("Centro");
 		assertEquals("002", bancoDoBrasilPantanal.obterIdentificador());
-		assertEquals("Pantanal", bancoDoBrasilPantanal.obterNome());
+		assertEquals("Centro", bancoDoBrasilPantanal.obterNome());
 		assertEquals(bancoDoBrasil, bancoDoBrasilPantanal.obterBanco());
+	}
+
+	@Test
+	public void caixaEconomicaTrindade() throws Exception {
+		SistemaBancario sistemaBancario = new SistemaBancario();
+		Banco caixaEconomica = sistemaBancario.criarBanco(Moeda.BRL);
+		Agencia caixaEconomicaTrindade = caixaEconomica.criarAgencia("Trindade");
+		assertEquals("001", caixaEconomicaTrindade.obterIdentificador());
+		assertEquals("Trindade", caixaEconomicaTrindade.obterNome());
+		assertEquals(caixaEconomica, caixaEconomicaTrindade.obterBanco());
 	}
 
 }
