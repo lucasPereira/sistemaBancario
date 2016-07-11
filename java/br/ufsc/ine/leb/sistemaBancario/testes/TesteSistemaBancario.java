@@ -86,18 +86,20 @@ public class TesteSistemaBancario {
 	@Test
 	public void transferir() throws Exception {
 		Dinheiro dezReais = new Dinheiro(Moeda.BRL, 10, 0);
-		Dinheiro cincoReais = new Dinheiro(Moeda.BRL, 5, 0);
-		ValorMonetario positivoCincoReais = cincoReais.positivo();
+		Dinheiro quatroReaisCinquentaCentavos = new Dinheiro(Moeda.BRL, 4, 50);
+		Dinheiro cincoReaisCinquentaCentavos = new Dinheiro(Moeda.BRL, 5, 50);
+		ValorMonetario positivoQuatroReaisCinquentaCentavos = quatroReaisCinquentaCentavos.positivo();
+		ValorMonetario positivoCincoReaisCinquentaCentavos = cincoReaisCinquentaCentavos.positivo();
 		SistemaBancario sistemaBancario = new SistemaBancario();
 		Banco bancoDoBrasil = sistemaBancario.criarBanco("Banco do Brasil", Moeda.BRL);
 		Agencia bancoDoBrasilTrindade = bancoDoBrasil.criarAgencia("Trindade");
 		Conta lucasBancoDoBrasil = bancoDoBrasilTrindade.criarConta("Lucas");
 		Conta patriciaBancoDoBrasil = bancoDoBrasilTrindade.criarConta("Patrícia");
 		sistemaBancario.depositar(lucasBancoDoBrasil, dezReais);
-		Operacao operacao = sistemaBancario.transferir(lucasBancoDoBrasil, patriciaBancoDoBrasil, cincoReais);
+		Operacao operacao = sistemaBancario.transferir(lucasBancoDoBrasil, patriciaBancoDoBrasil, quatroReaisCinquentaCentavos);
 		assertEquals(EstadosDeOperacao.SUCESSO, operacao.obterEstado());
-		assertEquals(positivoCincoReais, lucasBancoDoBrasil.calcularSaldo());
-		assertEquals(positivoCincoReais, patriciaBancoDoBrasil.calcularSaldo());
+		assertEquals(positivoCincoReaisCinquentaCentavos, lucasBancoDoBrasil.calcularSaldo());
+		assertEquals(positivoQuatroReaisCinquentaCentavos, patriciaBancoDoBrasil.calcularSaldo());
 	}
 
 	@Test

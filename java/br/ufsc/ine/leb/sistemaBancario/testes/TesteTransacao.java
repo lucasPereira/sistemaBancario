@@ -21,43 +21,43 @@ public class TesteTransacao {
 	@Test
 	public void entrada() throws Exception {
 		Dinheiro dezReais = new Dinheiro(Moeda.BRL, 10, 0);
-		ValorMonetario positivoZeroReais = new ValorMonetario(Moeda.BRL);
-		ValorMonetario positivoDezReais = new ValorMonetario(Moeda.BRL).somar(dezReais);
+		ValorMonetario zero = new ValorMonetario(Moeda.BRL);
+		ValorMonetario positivoDezReais = dezReais.positivo();
 		SistemaBancario sistemaBancario = new SistemaBancario();
 		Banco bancoDoBrasil = sistemaBancario.criarBanco("Banco do Brasil", Moeda.BRL);
 		Agencia bancoDoBrasilTrindade = bancoDoBrasil.criarAgencia("Trindade");
 		Conta lucasBancoDoBrasil = bancoDoBrasilTrindade.criarConta("Lucas");
 		Transacao transacao = new Entrada(lucasBancoDoBrasil, dezReais);
 		assertEquals(positivoDezReais, transacao.obterValorMonetario());
-		assertEquals(positivoDezReais, transacao.contabilizar(positivoZeroReais));
+		assertEquals(positivoDezReais, transacao.contabilizar(zero));
 	}
 
 	@Test
 	public void saida() throws Exception {
 		Dinheiro dezReais = new Dinheiro(Moeda.BRL, 10, 0);
-		ValorMonetario positivoZeroReais = new ValorMonetario(Moeda.BRL);
-		ValorMonetario negativoDezReais = new ValorMonetario(Moeda.BRL).subtrair(dezReais);
+		ValorMonetario zero = new ValorMonetario(Moeda.BRL);
+		ValorMonetario negativoDezReais = dezReais.negativo();
 		SistemaBancario sistemaBancario = new SistemaBancario();
 		Banco bancoDoBrasil = sistemaBancario.criarBanco("Banco do Brasil", Moeda.BRL);
 		Agencia bancoDoBrasilTrindade = bancoDoBrasil.criarAgencia("Trindade");
 		Conta lucasBancoDoBrasil = bancoDoBrasilTrindade.criarConta("Lucas");
 		Transacao transacao = new Saida(lucasBancoDoBrasil, dezReais);
 		assertEquals(negativoDezReais, transacao.obterValorMonetario());
-		assertEquals(negativoDezReais, transacao.contabilizar(positivoZeroReais));
+		assertEquals(negativoDezReais, transacao.contabilizar(zero));
 	}
 
 	@Test
 	public void invalida() throws Exception {
 		Dinheiro dezReais = new Dinheiro(Moeda.BRL, 10, 0);
-		ValorMonetario positivoZeroReais = new ValorMonetario(Moeda.BRL);
-		ValorMonetario negativoDezReais = new ValorMonetario(Moeda.BRL).subtrair(dezReais);
+		ValorMonetario zero = new ValorMonetario(Moeda.BRL);
+		ValorMonetario negativoDezReais = dezReais.negativo();
 		SistemaBancario sistemaBancario = new SistemaBancario();
 		Banco bancoDoBrasil = sistemaBancario.criarBanco("Banco do Brasil", Moeda.BRL);
 		Agencia bancoDoBrasilTrindade = bancoDoBrasil.criarAgencia("Trindade");
 		Conta lucasBancoDoBrasil = bancoDoBrasilTrindade.criarConta("Lucas");
 		Transacao transacao = new TransacaoNaoRealizada(new Saida(lucasBancoDoBrasil, dezReais));
 		assertEquals(negativoDezReais, transacao.obterValorMonetario());
-		assertEquals(positivoZeroReais, transacao.contabilizar(positivoZeroReais));
+		assertEquals(zero, transacao.contabilizar(zero));
 	}
 
 }
