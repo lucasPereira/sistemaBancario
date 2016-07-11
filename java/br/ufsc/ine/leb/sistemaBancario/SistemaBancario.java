@@ -18,30 +18,48 @@ public class SistemaBancario {
 	}
 
 	public Operacao depositar(Conta conta, Dinheiro quantia) {
+		Transacao entrada = new Entrada(conta, quantia);
 		EstadosDeOperacao estado = EstadosDeOperacao.SUCESSO;
-		Entrada entrada = new Entrada(conta, quantia);
+		if (moedaInvalida(conta, quantia)) {
+			entrada = new NaoRealizada(entrada);
+			estado = EstadosDeOperacao.MOEDA_INVALIDA;
+		}
 		conta.adicionarTransacao(entrada);
 		return new Operacao(estado, entrada);
 	}
 
 	public Operacao sacar(Conta conta, Dinheiro quantia) {
-		EstadosDeOperacao estado = EstadosDeOperacao.SUCESSO;
 		ValorMonetario saldo = conta.calcularSaldo();
 		Transacao saida = new Saida(conta, quantia);
+		EstadosDeOperacao estado = EstadosDeOperacao.SUCESSO;
 		if (!saldo.positivo() || saldo.obterQuantia().obterQuantiaEmEscala() < quantia.obterQuantiaEmEscala()) {
 			saida = new NaoRealizada(saida);
 			estado = EstadosDeOperacao.SALDO_INSUFICIENTE;
+		}
+		if (moedaInvalida(conta, quantia)) {
+			saida = new NaoRealizada(saida);
+			estado = EstadosDeOperacao.MOEDA_INVALIDA;
 		}
 		conta.adicionarTransacao(saida);
 		return new Operacao(estado, saida);
 	}
 
 	public Operacao transferir(Conta origem, Conta destino, Dinheiro quantia) {
-		Saida saida = new Saida(origem, quantia);
-		Entrada entrada = new Entrada(destino, quantia);
+		Transacao saida = new Saida(origem, quantia);
+		Transacao entrada = new Entrada(destino, quantia);
+		EstadosDeOperacao estado = EstadosDeOperacao.SUCESSO;
+		if (moedaInvalida(origem, quantia) || moedaInvalida(destino, quantia)) {
+			saida = new NaoRealizada(saida);
+			entrada = new NaoRealizada(entrada);
+			estado = EstadosDeOperacao.MOEDA_INVALIDA;
+		}
 		origem.adicionarTransacao(saida);
 		destino.adicionarTransacao(entrada);
-		return new Operacao(EstadosDeOperacao.SUCESSO, saida, entrada);
+		return new Operacao(estado, saida, entrada);
+	}
+
+	private boolean moedaInvalida(Conta conta, Dinheiro quantia) {
+		return !conta.obterAgencia().obterBanco().aceitaMoeda(quantia.obterMoeda());
 	}
 
 }
