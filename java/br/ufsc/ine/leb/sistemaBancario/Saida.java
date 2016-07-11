@@ -10,7 +10,7 @@ public class Saida implements Transacao {
 
 	@Override
 	public ValorMonetario obterValorMonetario() {
-		return new ValorMonetario(quantia.obterMoeda()).subtrair(quantia);
+		return quantia.negativo();
 	}
 
 	@Override

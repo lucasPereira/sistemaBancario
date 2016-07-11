@@ -101,7 +101,7 @@ public class TesteDinheiro {
 	@Test
 	public void comoValorMonetarioPositivo() throws Exception {
 		Dinheiro dezReais = new Dinheiro(Moeda.BRL, 10, 0);
-		ValorMonetario positivoDezReais = dezReais.valorMonetarioPositivo();
+		ValorMonetario positivoDezReais = dezReais.positivo();
 		assertFalse(positivoDezReais.negativo());
 		assertEquals(dezReais, positivoDezReais.obterQuantia());
 	}
@@ -109,7 +109,7 @@ public class TesteDinheiro {
 	@Test
 	public void comoValorMonetarioNegativo() throws Exception {
 		Dinheiro dezReais = new Dinheiro(Moeda.BRL, 10, 0);
-		ValorMonetario negativoDezReais = dezReais.valorMonetarioNegativo();
+		ValorMonetario negativoDezReais = dezReais.negativo();
 		assertTrue(negativoDezReais.negativo());
 		assertEquals(dezReais, negativoDezReais.obterQuantia());
 	}

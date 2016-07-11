@@ -10,7 +10,7 @@ public class Entrada implements Transacao {
 
 	@Override
 	public ValorMonetario obterValorMonetario() {
-		return new ValorMonetario(quantia.obterMoeda()).somar(quantia);
+		return quantia.positivo();
 	}
 
 	@Override

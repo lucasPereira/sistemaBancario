@@ -15,6 +15,7 @@ public class TesteValorMonetario {
 		Dinheiro zeroReais = new Dinheiro(Moeda.BRL, 0, 0);
 		ValorMonetario valor = new ValorMonetario(Moeda.BRL);
 		assertFalse(valor.negativo());
+		assertTrue(valor.zero());
 		assertEquals(zeroReais, valor.obterQuantia());
 		assertEquals("0,00", valor.formatado());
 	}
@@ -26,6 +27,7 @@ public class TesteValorMonetario {
 		Dinheiro dezReaisCinquentaCentavos = new Dinheiro(Moeda.BRL, 10, 50);
 		ValorMonetario valor = new ValorMonetario(Moeda.BRL).somar(dezReais).somar(cinquentaCentavos);
 		assertFalse(valor.negativo());
+		assertFalse(valor.zero());
 		assertEquals(dezReaisCinquentaCentavos, valor.obterQuantia());
 		assertEquals("+10,50 BRL", valor.formatado());
 	}
@@ -37,6 +39,7 @@ public class TesteValorMonetario {
 		Dinheiro dezReaisCinquentaCentavos = new Dinheiro(Moeda.BRL, 10, 50);
 		ValorMonetario valor = new ValorMonetario(Moeda.BRL).subtrair(dezReais).subtrair(cinquentaCentavos);
 		assertTrue(valor.negativo());
+		assertFalse(valor.zero());
 		assertEquals(dezReaisCinquentaCentavos, valor.obterQuantia());
 		assertEquals("-10,50 BRL", valor.formatado());
 	}
@@ -48,6 +51,7 @@ public class TesteValorMonetario {
 		Dinheiro noveReaisCinquentaCentavos = new Dinheiro(Moeda.BRL, 9, 50);
 		ValorMonetario valor = new ValorMonetario(Moeda.BRL).somar(dezReais).subtrair(cinquentaCentavos);
 		assertFalse(valor.negativo());
+		assertFalse(valor.zero());
 		assertEquals(noveReaisCinquentaCentavos, valor.obterQuantia());
 		assertEquals("+9,50 BRL", valor.formatado());
 	}
@@ -59,6 +63,7 @@ public class TesteValorMonetario {
 		Dinheiro noveReaisCinquentaCentavos = new Dinheiro(Moeda.BRL, 9, 50);
 		ValorMonetario valor = new ValorMonetario(Moeda.BRL).subtrair(dezReais).somar(cinquentaCentavos);
 		assertTrue(valor.negativo());
+		assertFalse(valor.zero());
 		assertEquals(noveReaisCinquentaCentavos, valor.obterQuantia());
 		assertEquals("-9,50 BRL", valor.formatado());
 	}
@@ -81,8 +86,7 @@ public class TesteValorMonetario {
 		assertEquals(new ValorMonetario(Moeda.BRL), new ValorMonetario(Moeda.BRL));
 		assertEquals(new ValorMonetario(Moeda.BRL), new ValorMonetario(Moeda.USD));
 		assertEquals(new ValorMonetario(Moeda.BRL).somar(dezReais), new ValorMonetario(Moeda.BRL).somar(dezReais));
-		assertEquals(new ValorMonetario(Moeda.BRL).subtrair(dezReais),
-				new ValorMonetario(Moeda.BRL).subtrair(dezReais));
+		assertEquals(new ValorMonetario(Moeda.BRL).subtrair(dezReais), new ValorMonetario(Moeda.BRL).subtrair(dezReais));
 	}
 
 	@Test
@@ -90,8 +94,7 @@ public class TesteValorMonetario {
 		Dinheiro dezReais = new Dinheiro(Moeda.BRL, 10, 0);
 		assertNotEquals(new ValorMonetario(Moeda.BRL).somar(dezReais), new ValorMonetario(Moeda.BRL));
 		assertNotEquals(new ValorMonetario(Moeda.BRL).subtrair(dezReais), new ValorMonetario(Moeda.BRL));
-		assertNotEquals(new ValorMonetario(Moeda.BRL).somar(dezReais),
-				new ValorMonetario(Moeda.BRL).subtrair(dezReais));
+		assertNotEquals(new ValorMonetario(Moeda.BRL).somar(dezReais), new ValorMonetario(Moeda.BRL).subtrair(dezReais));
 	}
 
 }

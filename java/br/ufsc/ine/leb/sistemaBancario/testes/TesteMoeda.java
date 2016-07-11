@@ -16,13 +16,20 @@ public class TesteMoeda {
 		List<Moeda> moedas = Arrays.asList(Moeda.values());
 		assertEquals(Moeda.BRL, moedas.get(0));
 		assertEquals(Moeda.USD, moedas.get(1));
-		assertEquals(2, moedas.size());
+		assertEquals(Moeda.CHF, moedas.get(2));
+		assertEquals(3, moedas.size());
 	}
 
 	@Test
 	public void brl() throws Exception {
 		assertEquals("R$", Moeda.BRL.obterSimbolo());
 		assertEquals(100, Moeda.BRL.obterBaseFracionaria().intValue());
+	}
+
+	@Test
+	public void chf() throws Exception {
+		assertEquals("Fr", Moeda.CHF.obterSimbolo());
+		assertEquals(100, Moeda.CHF.obterBaseFracionaria().intValue());
 	}
 
 	@Test

@@ -30,7 +30,8 @@ public class Conta {
 	}
 
 	public ValorMonetario calcularSaldo() {
-		ValorMonetario saldo = obterAgencia().obterBanco().construirValorMonetario();
+		Moeda moeda = obterAgencia().obterBanco().obterMoeda();
+		ValorMonetario saldo = new Dinheiro(moeda, 0, 0).positivo();
 		for (Transacao transacao : transacoes) {
 			saldo = transacao.contabilizar(saldo);
 		}

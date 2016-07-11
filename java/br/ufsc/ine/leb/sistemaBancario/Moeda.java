@@ -2,7 +2,7 @@ package br.ufsc.ine.leb.sistemaBancario;
 
 public enum Moeda {
 
-	BRL("R$", 100), USD("$", 100);
+	BRL("R$", 100), USD("$", 100), CHF("Fr", 100);
 
 	private String simbolo;
 	private Integer baseFracionaria;

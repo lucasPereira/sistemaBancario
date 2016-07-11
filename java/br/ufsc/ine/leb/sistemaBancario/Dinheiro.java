@@ -44,11 +44,11 @@ public class Dinheiro {
 		return inteiro == 0 && fracionado == 0;
 	}
 
-	public ValorMonetario valorMonetarioPositivo() {
+	public ValorMonetario positivo() {
 		return new ValorMonetario(moeda).somar(this);
 	}
 
-	public ValorMonetario valorMonetarioNegativo() {
+	public ValorMonetario negativo() {
 		return new ValorMonetario(moeda).subtrair(this);
 	}
 

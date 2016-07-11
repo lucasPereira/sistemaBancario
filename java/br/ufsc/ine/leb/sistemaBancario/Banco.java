@@ -7,8 +7,10 @@ public class Banco {
 
 	private Moeda moeda;
 	private List<Agencia> agencias;
+	private String nome;
 
-	protected Banco(Moeda moeda) {
+	protected Banco(String nome, Moeda moeda) {
+		this.nome = nome;
 		this.moeda = moeda;
 		this.agencias = new LinkedList<>();
 	}
@@ -18,13 +20,13 @@ public class Banco {
 		agencias.add(agencia);
 		return agencia;
 	}
-
-	public Boolean aceitaMoeda(Moeda outraMoeda) {
-		return moeda.equals(outraMoeda);
+	
+	public String obterNome() {
+		return nome;
 	}
 
-	public ValorMonetario construirValorMonetario() {
-		return new ValorMonetario(moeda);
+	public Moeda obterMoeda() {
+		return moeda;
 	}
 
 }

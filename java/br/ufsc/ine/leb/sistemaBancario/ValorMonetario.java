@@ -48,7 +48,7 @@ public class ValorMonetario {
 		return String.format("%s", quantia.formatado());
 	}
 
-	private Boolean zero() {
+	public Boolean zero() {
 		return quantia.obterQuantiaEmEscala() == 0;
 	}
 

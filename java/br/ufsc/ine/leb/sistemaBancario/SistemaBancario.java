@@ -11,8 +11,8 @@ public class SistemaBancario {
 		bancos = new LinkedList<>();
 	}
 
-	public Banco criarBanco(Moeda moeda) {
-		Banco banco = new Banco(moeda);
+	public Banco criarBanco(String nome, Moeda moeda) {
+		Banco banco = new Banco(nome, moeda);
 		bancos.add(banco);
 		return banco;
 	}
@@ -21,7 +21,7 @@ public class SistemaBancario {
 		Transacao entrada = new Entrada(conta, quantia);
 		EstadosDeOperacao estado = EstadosDeOperacao.SUCESSO;
 		if (moedaInvalida(conta, quantia)) {
-			entrada = new NaoRealizada(entrada);
+			entrada = new TransacaoNaoRealizada(entrada);
 			estado = EstadosDeOperacao.MOEDA_INVALIDA;
 		}
 		conta.adicionarTransacao(entrada);
@@ -33,11 +33,11 @@ public class SistemaBancario {
 		Transacao saida = new Saida(conta, quantia);
 		EstadosDeOperacao estado = EstadosDeOperacao.SUCESSO;
 		if (saldo.negativo() || saldoFicaraNegativo(saldo, quantia)) {
-			saida = new NaoRealizada(saida);
+			saida = new TransacaoNaoRealizada(saida);
 			estado = EstadosDeOperacao.SALDO_INSUFICIENTE;
 		}
 		if (moedaInvalida(conta, quantia)) {
-			saida = new NaoRealizada(saida);
+			saida = new TransacaoNaoRealizada(saida);
 			estado = EstadosDeOperacao.MOEDA_INVALIDA;
 		}
 		conta.adicionarTransacao(saida);
@@ -49,21 +49,23 @@ public class SistemaBancario {
 		Transacao entrada = new Entrada(destino, quantia);
 		EstadosDeOperacao estado = EstadosDeOperacao.SUCESSO;
 		if (moedaInvalida(origem, quantia) || moedaInvalida(destino, quantia)) {
-			saida = new NaoRealizada(saida);
-			entrada = new NaoRealizada(entrada);
+			saida = new TransacaoNaoRealizada(saida);
+			entrada = new TransacaoNaoRealizada(entrada);
 			estado = EstadosDeOperacao.MOEDA_INVALIDA;
 		}
 		origem.adicionarTransacao(saida);
 		destino.adicionarTransacao(entrada);
 		return new Operacao(estado, saida, entrada);
 	}
-	
-	private boolean saldoFicaraNegativo(ValorMonetario saldo, Dinheiro quantia) {
+
+	private Boolean saldoFicaraNegativo(ValorMonetario saldo, Dinheiro quantia) {
 		return saldo.obterQuantia().obterQuantiaEmEscala() < quantia.obterQuantiaEmEscala();
 	}
 
-	private boolean moedaInvalida(Conta conta, Dinheiro quantia) {
-		return !conta.obterAgencia().obterBanco().aceitaMoeda(quantia.obterMoeda());
+	private Boolean moedaInvalida(Conta conta, Dinheiro quantia) {
+		Moeda moedaDoBanco = conta.obterAgencia().obterBanco().obterMoeda();
+		Moeda moedaDaOperacao = quantia.obterMoeda();
+		return !moedaDoBanco.equals(moedaDaOperacao);
 	}
 
 }

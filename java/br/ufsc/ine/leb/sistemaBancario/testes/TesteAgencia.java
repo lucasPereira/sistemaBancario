@@ -14,7 +14,7 @@ public class TesteAgencia {
 	@Test
 	public void bancoDoBrasilTrindade() throws Exception {
 		SistemaBancario sistemaBancario = new SistemaBancario();
-		Banco bancoDoBrasil = sistemaBancario.criarBanco(Moeda.BRL);
+		Banco bancoDoBrasil = sistemaBancario.criarBanco("Banco do Brasil", Moeda.BRL);
 		Agencia bancoDoBrasilTrindade = bancoDoBrasil.criarAgencia("Trindade");
 		assertEquals("001", bancoDoBrasilTrindade.obterIdentificador());
 		assertEquals("Trindade", bancoDoBrasilTrindade.obterNome());
@@ -24,7 +24,7 @@ public class TesteAgencia {
 	@Test
 	public void bancoDoBrasilCentro() throws Exception {
 		SistemaBancario sistemaBancario = new SistemaBancario();
-		Banco bancoDoBrasil = sistemaBancario.criarBanco(Moeda.BRL);
+		Banco bancoDoBrasil = sistemaBancario.criarBanco("Banco do Brasil", Moeda.BRL);
 		bancoDoBrasil.criarAgencia("Trindade");
 		Agencia bancoDoBrasilPantanal = bancoDoBrasil.criarAgencia("Centro");
 		assertEquals("002", bancoDoBrasilPantanal.obterIdentificador());
@@ -35,11 +35,23 @@ public class TesteAgencia {
 	@Test
 	public void caixaEconomicaTrindade() throws Exception {
 		SistemaBancario sistemaBancario = new SistemaBancario();
-		Banco caixaEconomica = sistemaBancario.criarBanco(Moeda.BRL);
+		Banco bancoDoBrasil = sistemaBancario.criarBanco("Banco do Brasil", Moeda.BRL);
+		Banco caixaEconomica = sistemaBancario.criarBanco("Caixa Econômica", Moeda.BRL);
+		bancoDoBrasil.criarAgencia("Trindade");
 		Agencia caixaEconomicaTrindade = caixaEconomica.criarAgencia("Trindade");
 		assertEquals("001", caixaEconomicaTrindade.obterIdentificador());
 		assertEquals("Trindade", caixaEconomicaTrindade.obterNome());
 		assertEquals(caixaEconomica, caixaEconomicaTrindade.obterBanco());
+	}
+
+	@Test
+	public void swissBankZurique() throws Exception {
+		SistemaBancario sistemaBancario = new SistemaBancario();
+		Banco swissBank = sistemaBancario.criarBanco("Swiss Bank", Moeda.CHF);
+		Agencia swissBankZurique = swissBank.criarAgencia("Zurique");
+		assertEquals("001", swissBankZurique.obterIdentificador());
+		assertEquals("Zurique", swissBankZurique.obterNome());
+		assertEquals(swissBank, swissBankZurique.obterBanco());
 	}
 
 }

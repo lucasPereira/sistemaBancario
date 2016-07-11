@@ -1,10 +1,10 @@
 package br.ufsc.ine.leb.sistemaBancario;
 
-public class NaoRealizada implements Transacao {
+public class TransacaoNaoRealizada implements Transacao {
 
 	private Transacao transacao;
 
-	public NaoRealizada(Transacao transacao) {
+	public TransacaoNaoRealizada(Transacao transacao) {
 		this.transacao = transacao;
 	}
 
