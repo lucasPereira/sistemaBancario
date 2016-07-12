@@ -22,16 +22,16 @@ public class TesteBanco {
 	public void caixaEconomica() throws Exception {
 		SistemaBancario sistemaBancario = new SistemaBancario();
 		Banco caixaEconomica = sistemaBancario.criarBanco("Caixa Econômica", Moeda.BRL);
-		assertEquals(Moeda.BRL, caixaEconomica.obterMoeda());
 		assertEquals("Caixa Econômica", caixaEconomica.obterNome());
+		assertEquals(Moeda.BRL, caixaEconomica.obterMoeda());
 	}
 
 	@Test
 	public void swissBank() throws Exception {
 		SistemaBancario sistemaBancario = new SistemaBancario();
 		Banco swissBank = sistemaBancario.criarBanco("Swiss Bank", Moeda.CHF);
-		assertEquals(Moeda.CHF, swissBank.obterMoeda());
 		assertEquals("Swiss Bank", swissBank.obterNome());
+		assertEquals(Moeda.CHF, swissBank.obterMoeda());
 	}
 
 }
