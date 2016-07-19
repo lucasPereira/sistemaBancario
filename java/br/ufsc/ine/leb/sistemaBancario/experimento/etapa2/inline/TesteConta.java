@@ -20,7 +20,7 @@ public class TesteConta {
 		Banco caixaEconomica = sistemaBancario.criarBanco("Caixa Econômica", Moeda.BRL);
 		Agencia caixaEconomicaTrindade = caixaEconomica.criarAgencia("Trindade");
 		Conta joaoCaixaEconomicaTrindade = caixaEconomicaTrindade.criarConta("João");
-		assertEquals("0001-8", joaoCaixaEconomicaTrindade.obterIdentificador());
+		assertEquals("0001-4", joaoCaixaEconomicaTrindade.obterIdentificador());
 		assertEquals("João", joaoCaixaEconomicaTrindade.obterTitular());
 		assertTrue(joaoCaixaEconomicaTrindade.calcularSaldo().zero());
 		assertEquals(caixaEconomicaTrindade, joaoCaixaEconomicaTrindade.obterAgencia());

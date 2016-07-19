@@ -5,12 +5,16 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.ufsc.ine.leb.projetos.estoria.Fixture;
+import br.ufsc.ine.leb.projetos.estoria.FixtureSetup;
 import br.ufsc.ine.leb.sistemaBancario.Agencia;
 import br.ufsc.ine.leb.sistemaBancario.Banco;
+import br.ufsc.ine.leb.sistemaBancario.experimento.etapa1.dependency.TesteBanco;
 
+@FixtureSetup(TesteBanco.class)
 public class TesteAgencia {
 
-	private Banco caixaEconomica;
+	@Fixture private Banco caixaEconomica;
 
 	private Agencia caixaEconomicaTrindade;
 

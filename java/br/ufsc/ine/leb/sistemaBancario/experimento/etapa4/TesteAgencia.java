@@ -16,7 +16,7 @@ public class TesteAgencia {
 		SistemaBancario sistemaBancario = new SistemaBancario();
 		Banco bancoDoBrasil = sistemaBancario.criarBanco("Banco do Brasil", Moeda.BRL);
 		Agencia bancoDoBrasilCentro = bancoDoBrasil.criarAgencia("Centro");
-		assertEquals("002", bancoDoBrasilCentro.obterIdentificador());
+		assertEquals("001", bancoDoBrasilCentro.obterIdentificador());
 		assertEquals("Centro", bancoDoBrasilCentro.obterNome());
 		assertEquals(bancoDoBrasil, bancoDoBrasilCentro.obterBanco());
 	}

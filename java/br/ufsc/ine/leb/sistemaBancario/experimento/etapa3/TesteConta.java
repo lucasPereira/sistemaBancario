@@ -18,7 +18,7 @@ public class TesteConta {
 		SistemaBancario sistemaBancario = new SistemaBancario();
 		Banco bancoDoBrasil = sistemaBancario.criarBanco("Banco do Brasil", Moeda.BRL);
 		Agencia bancoDoBrasilCentro = bancoDoBrasil.criarAgencia("Centro");
-		Conta mariaBancoDoBrasilCentro = bancoDoBrasilCentro.criarConta("Lucas");
+		Conta mariaBancoDoBrasilCentro = bancoDoBrasilCentro.criarConta("Maria");
 		assertEquals("0001-5", mariaBancoDoBrasilCentro.obterIdentificador());
 		assertEquals("Maria", mariaBancoDoBrasilCentro.obterTitular());
 		assertTrue(mariaBancoDoBrasilCentro.calcularSaldo().zero());
