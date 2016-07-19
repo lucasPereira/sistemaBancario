@@ -11,17 +11,7 @@ import br.ufsc.ine.leb.projetos.estoria.FixtureSetup;
 import br.ufsc.ine.leb.sistemaBancario.Agencia;
 import br.ufsc.ine.leb.sistemaBancario.Conta;
 
-@FixtureSetup(TesteAgencia.class)
 public class TesteConta {
-
-	@Fixture private Agencia caixaEconomicaTrindade;
-
-	private Conta joaoCaixaEconomicaTrindade;
-
-	@Before
-	public void configurar() throws Exception {
-		joaoCaixaEconomicaTrindade = caixaEconomicaTrindade.criarConta("João");
-	}
 
 	@Test
 	public void joaoCaixaEconomicaTrindade() throws Exception {

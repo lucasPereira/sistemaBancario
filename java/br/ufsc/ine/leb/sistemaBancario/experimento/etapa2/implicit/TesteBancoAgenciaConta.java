@@ -8,22 +8,9 @@ import org.junit.Test;
 
 import br.ufsc.ine.leb.sistemaBancario.Agencia;
 import br.ufsc.ine.leb.sistemaBancario.Banco;
-import br.ufsc.ine.leb.sistemaBancario.Conta;
 import br.ufsc.ine.leb.sistemaBancario.Moeda;
-import br.ufsc.ine.leb.sistemaBancario.SistemaBancario;
-import br.ufsc.ine.leb.sistemaBancario.experimento.etapa2.delegate.Auxiliar;
 
 public class TesteBancoAgenciaConta {
-
-	private Banco caixaEconomica;
-	private Agencia caixaEconomicaTrindade;
-
-	@Before
-	public void configurar() throws Exception {
-		SistemaBancario sistemaBancario = new SistemaBancario();
-		caixaEconomica = sistemaBancario.criarBanco("Caixa Econômica", Moeda.BRL);
-		caixaEconomicaTrindade = caixaEconomica.criarAgencia("Trindade");
-	}
 
 	@Test
 	public void caixaEconomica() throws Exception {
@@ -40,7 +27,6 @@ public class TesteBancoAgenciaConta {
 
 	@Test
 	public void joaoCaixaEconomicaTrindade() throws Exception {
-		Conta joaoCaixaEconomicaTrindade = Auxiliar.cirarJoao(caixaEconomicaTrindade);
 		assertEquals("0001-4", joaoCaixaEconomicaTrindade.obterIdentificador());
 		assertEquals("João", joaoCaixaEconomicaTrindade.obterTitular());
 		assertTrue(joaoCaixaEconomicaTrindade.calcularSaldo().zero());
