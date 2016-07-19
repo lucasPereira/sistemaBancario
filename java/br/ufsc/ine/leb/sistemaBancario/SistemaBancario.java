@@ -68,4 +68,8 @@ public class SistemaBancario {
 		return !moedaDoBanco.equals(moedaDaOperacao);
 	}
 
+	public List<Banco> obterBancos() {
+		return bancos;
+	}
+
 }
