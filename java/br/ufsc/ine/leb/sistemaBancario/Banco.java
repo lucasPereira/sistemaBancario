@@ -9,7 +9,7 @@ public class Banco {
 	private List<Agencia> agencias;
 	private String nome;
 
-	protected Banco(String nome, Moeda moeda) {
+	protected Banco(String nome, Moeda moeda, Dinheiro taxa) {
 		this.nome = nome;
 		this.moeda = moeda;
 		this.agencias = new LinkedList<>();

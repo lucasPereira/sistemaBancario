@@ -1,4 +1,4 @@
-package br.ufsc.ine.leb.sistemaBancario.experimento.etapa1.delegate;
+package br.ufsc.ine.leb.sistemaBancario.experimento.etapa2.delegate;
 
 import static org.junit.Assert.assertEquals;
 

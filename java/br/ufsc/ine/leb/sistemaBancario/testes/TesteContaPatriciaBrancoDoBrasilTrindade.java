@@ -1,4 +1,4 @@
-package br.ufsc.ine.leb.sistemaBancario.experimento.etapa1.inline;
+package br.ufsc.ine.leb.sistemaBancario.testes;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -11,17 +11,17 @@ import br.ufsc.ine.leb.sistemaBancario.Conta;
 import br.ufsc.ine.leb.sistemaBancario.Moeda;
 import br.ufsc.ine.leb.sistemaBancario.SistemaBancario;
 
-public class TesteContaLucasBrancoDoBrasilCentro {
+public class TesteContaPatriciaBrancoDoBrasilTrindade {
 
 	@Test
 	public void testar() throws Exception {
 		SistemaBancario sistemaBancario = new SistemaBancario();
 		Banco bancoDoBrasil = sistemaBancario.criarBanco("Banco do Brasil", Moeda.BRL);
-		Agencia bancoDoBrasilTrindade = bancoDoBrasil.criarAgencia("Centro");
-		Conta lucasBancoDoBrasilCentro = bancoDoBrasilTrindade.criarConta("Lucas");
-		assertEquals("Lucas", lucasBancoDoBrasilCentro.obterTitular());
-		assertTrue(lucasBancoDoBrasilCentro.calcularSaldo().zero());
-		assertEquals(bancoDoBrasilTrindade, lucasBancoDoBrasilCentro.obterAgencia());
+		Agencia bancoDoBrasilTrindade = bancoDoBrasil.criarAgencia("Trindade");
+		Conta patriciaBancoDoBrasilTrindade = bancoDoBrasilTrindade.criarConta("Patrícia");
+		assertEquals("Patrícia", patriciaBancoDoBrasilTrindade.obterTitular());
+		assertTrue(patriciaBancoDoBrasilTrindade.calcularSaldo().zero());
+		assertEquals(bancoDoBrasilTrindade, patriciaBancoDoBrasilTrindade.obterAgencia());
 	}
 
 }

@@ -10,22 +10,25 @@ import br.ufsc.ine.leb.sistemaBancario.Banco;
 import br.ufsc.ine.leb.sistemaBancario.Moeda;
 import br.ufsc.ine.leb.sistemaBancario.SistemaBancario;
 
-public class TesteAgencia {
+public class TesteBancoAgencia {
 
 	private Banco caixaEconomica;
-	private Agencia caixaEconomicaTrindade;
 
 	@Before
 	public void configurar() throws Exception {
-		/** Completar */
 		SistemaBancario sistemaBancario = new SistemaBancario();
 		caixaEconomica = sistemaBancario.criarBanco("Caixa Econômica", Moeda.BRL);
-		caixaEconomicaTrindade = caixaEconomica.criarAgencia("Trindade");
-		/** Completar */
 	}
 
 	@Test
-	public void testar() throws Exception {
+	public void caixaEconomica() throws Exception {
+		assertEquals("Caixa Econômica", caixaEconomica.obterNome());
+		assertEquals(Moeda.BRL, caixaEconomica.obterMoeda());
+	}
+
+	@Test
+	public void caixaEconomicaTrindade() throws Exception {
+		Agencia caixaEconomicaTrindade = caixaEconomica.criarAgencia("Trindade");
 		assertEquals("001", caixaEconomicaTrindade.obterIdentificador());
 		assertEquals("Trindade", caixaEconomicaTrindade.obterNome());
 		assertEquals(caixaEconomica, caixaEconomicaTrindade.obterBanco());

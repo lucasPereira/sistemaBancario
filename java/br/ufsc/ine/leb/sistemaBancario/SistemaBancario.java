@@ -12,7 +12,7 @@ public class SistemaBancario {
 	}
 
 	public Banco criarBanco(String nome, Moeda moeda) {
-		Banco banco = new Banco(nome, moeda);
+		Banco banco = new Banco(nome, moeda, new Dinheiro(moeda, 0, 0));
 		bancos.add(banco);
 		return banco;
 	}

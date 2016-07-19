@@ -1,4 +1,4 @@
-package br.ufsc.ine.leb.sistemaBancario.experimento.etapa1.dependency;
+package br.ufsc.ine.leb.sistemaBancario.experimento.etapa2.dependency;
 
 import static org.junit.Assert.assertEquals;
 
@@ -9,21 +9,20 @@ import br.ufsc.ine.leb.sistemaBancario.Banco;
 import br.ufsc.ine.leb.sistemaBancario.Moeda;
 import br.ufsc.ine.leb.sistemaBancario.SistemaBancario;
 
-public class TesteSistemaBancario {
+public class TesteBanco {
 
-	private SistemaBancario sistemaBancario;
 	private Banco caixaEconomica;
 
 	@Before
 	public void configurar() throws Exception {
-		sistemaBancario = new SistemaBancario();
+		SistemaBancario sistemaBancario = new SistemaBancario();
 		caixaEconomica = sistemaBancario.criarBanco("Caixa Econômica", Moeda.BRL);
 	}
 
 	@Test
-	public void testar() throws Exception {
-		assertEquals(1, sistemaBancario.obterBancos().size());
-		assertEquals(caixaEconomica, sistemaBancario.obterBancos().size());
+	public void caixaEconomica() throws Exception {
+		assertEquals("Caixa Econômica", caixaEconomica.obterNome());
+		assertEquals(Moeda.BRL, caixaEconomica.obterMoeda());
 	}
 
 }

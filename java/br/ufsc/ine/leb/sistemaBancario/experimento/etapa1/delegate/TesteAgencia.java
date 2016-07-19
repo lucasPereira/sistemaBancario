@@ -1,4 +1,4 @@
-package br.ufsc.ine.leb.sistemaBancario.experimento.etapa2.delegate;
+package br.ufsc.ine.leb.sistemaBancario.experimento.etapa1.delegate;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,7 +6,6 @@ import org.junit.Test;
 
 import br.ufsc.ine.leb.sistemaBancario.Agencia;
 import br.ufsc.ine.leb.sistemaBancario.Banco;
-import br.ufsc.ine.leb.sistemaBancario.experimento.etapa1.delegate.Auxiliar;
 
 public class TesteAgencia {
 

@@ -1,15 +1,16 @@
-package br.ufsc.ine.leb.sistemaBancario.experimento.etapa2.proposta;
+package br.ufsc.ine.leb.sistemaBancario.experimento.etapa1.implicit;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import br.ufsc.ine.leb.sistemaBancario.Agencia;
 import br.ufsc.ine.leb.sistemaBancario.Banco;
 import br.ufsc.ine.leb.sistemaBancario.Moeda;
 import br.ufsc.ine.leb.sistemaBancario.SistemaBancario;
 
-public class TesteBanco {
+public class TesteBancoAgencia {
 
 	private Banco caixaEconomica;
 
@@ -20,9 +21,17 @@ public class TesteBanco {
 	}
 
 	@Test
-	public void testar() throws Exception {
+	public void caixaEconomica() throws Exception {
 		assertEquals("Caixa Econômica", caixaEconomica.obterNome());
 		assertEquals(Moeda.BRL, caixaEconomica.obterMoeda());
+	}
+
+	@Test
+	public void caixaEconomicaTrindade() throws Exception {
+		Agencia caixaEconomicaTrindade = caixaEconomica.criarAgencia("Trindade");
+		assertEquals("001", caixaEconomicaTrindade.obterIdentificador());
+		assertEquals("Trindade", caixaEconomicaTrindade.obterNome());
+		assertEquals(caixaEconomica, caixaEconomicaTrindade.obterBanco());
 	}
 
 }
