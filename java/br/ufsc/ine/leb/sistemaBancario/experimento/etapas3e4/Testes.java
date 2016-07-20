@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.ufsc.ine.leb.sistemaBancario.Banco;
+import br.ufsc.ine.leb.sistemaBancario.Dinheiro;
 import br.ufsc.ine.leb.sistemaBancario.Moeda;
 import br.ufsc.ine.leb.sistemaBancario.SistemaBancario;
 
@@ -13,11 +14,13 @@ public class Testes {
 	
 	private SistemaBancario sistemaBancario;
 	private Banco bancoDoBrasil;
+	private Dinheiro taxa;
 	
 	@Before
 	public void setup() {
 		sistemaBancario = new SistemaBancario();
-		bancoDoBrasil = sistemaBancario.criarBanco("Banco Do Brasil", Moeda.BRL);
+		taxa = new Dinheiro(Moeda.BRL, 0, 0);
+		bancoDoBrasil = sistemaBancario.criarBanco("Banco Do Brasil", Moeda.BRL, taxa);
 	}
 	
 

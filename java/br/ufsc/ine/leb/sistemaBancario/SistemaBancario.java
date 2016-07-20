@@ -11,7 +11,7 @@ public class SistemaBancario {
 		bancos = new LinkedList<>();
 	}
 
-	public Banco criarBanco(String nome, Moeda moeda) {
+	public Banco criarBanco(String nome, Moeda moeda, Dinheiro taxaPorOperacaoDeTransferencia) {
 		Banco banco = new Banco(nome, moeda, new Dinheiro(moeda, 0, 0));
 		bancos.add(banco);
 		return banco;
