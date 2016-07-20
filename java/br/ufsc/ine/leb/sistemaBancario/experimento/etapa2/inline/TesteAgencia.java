@@ -13,6 +13,9 @@ public class TesteAgencia {
 
 	@Test
 	public void caixaEconomicaTrindade() throws Exception {
+		SistemaBancario sistema = new SistemaBancario();
+		Banco caixaEconomica = sistema.criarBanco("Caixa Econômica", Moeda.BRL);
+		Agencia caixaEconomicaTrindade = caixaEconomica.criarAgencia("Trindade");
 		assertEquals("001", caixaEconomicaTrindade.obterIdentificador());
 		assertEquals("Trindade", caixaEconomicaTrindade.obterNome());
 		assertEquals(caixaEconomica, caixaEconomicaTrindade.obterBanco());

@@ -11,8 +11,18 @@ import br.ufsc.ine.leb.sistemaBancario.Agencia;
 import br.ufsc.ine.leb.sistemaBancario.Banco;
 import br.ufsc.ine.leb.sistemaBancario.experimento.etapa1.dependency.TesteBanco;
 
+@FixtureSetup(TesteBanco.class)
 public class TesteAgencia {
 
+	@Fixture
+	private Banco caixaEconomica;
+	private Agencia caixaEconomicaTrindade;
+	
+	@Before
+	public void setup() throws Exception {
+		caixaEconomicaTrindade = caixaEconomica.criarAgencia("Trindade");
+	}
+	
 	@Test
 	public void caixaEconomicaTrindade() throws Exception {
 		assertEquals("001", caixaEconomicaTrindade.obterIdentificador());
