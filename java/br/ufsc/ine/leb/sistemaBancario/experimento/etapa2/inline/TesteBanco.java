@@ -12,6 +12,8 @@ public class TesteBanco {
 
 	@Test
 	public void caixaEconomica() throws Exception {
+		SistemaBancario sistemaBancario = new SistemaBancario();
+		Banco caixaEconomica = sistemaBancario.criarBanco("Caixa Econômica", Moeda.BRL);
 		assertEquals("Caixa Econômica", caixaEconomica.obterNome());
 		assertEquals(Moeda.BRL, caixaEconomica.obterMoeda());
 	}

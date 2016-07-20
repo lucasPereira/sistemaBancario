@@ -13,6 +13,9 @@ public class TesteConta {
 
 	@Test
 	public void joaoCaixaEconomicaTrindade() throws Exception {
+		Banco caixaEconomica = Auxiliar.criarBanco();
+		Agencia caixaEconomicaTrindade = Auxiliar.criarAgencia(caixaEconomica);
+		Conta joaoCaixaEconomicaTrindade = Auxiliar.criarConta(caixaEconomicaTrindade);
 		assertEquals("0001-4", joaoCaixaEconomicaTrindade.obterIdentificador());
 		assertEquals("João", joaoCaixaEconomicaTrindade.obterTitular());
 		assertTrue(joaoCaixaEconomicaTrindade.calcularSaldo().zero());

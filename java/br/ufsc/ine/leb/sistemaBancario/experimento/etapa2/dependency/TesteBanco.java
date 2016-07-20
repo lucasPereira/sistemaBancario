@@ -11,6 +11,14 @@ import br.ufsc.ine.leb.sistemaBancario.SistemaBancario;
 
 public class TesteBanco {
 
+	private Banco caixaEconomica;
+	
+	@Before
+	public void configura() throws Exception {
+		SistemaBancario sistemaBancario = new SistemaBancario();
+		caixaEconomica = sistemaBancario.criarBanco("Caixa Econômica", Moeda.BRL);
+	}
+
 	@Test
 	public void caixaEconomica() throws Exception {
 		assertEquals("Caixa Econômica", caixaEconomica.obterNome());

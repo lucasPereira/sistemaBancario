@@ -8,9 +8,23 @@ import org.junit.Test;
 
 import br.ufsc.ine.leb.sistemaBancario.Agencia;
 import br.ufsc.ine.leb.sistemaBancario.Banco;
+import br.ufsc.ine.leb.sistemaBancario.Conta;
 import br.ufsc.ine.leb.sistemaBancario.Moeda;
+import br.ufsc.ine.leb.sistemaBancario.SistemaBancario;
 
 public class TesteBancoAgenciaConta {
+	
+	private Banco caixaEconomica;
+	private Agencia caixaEconomicaTrindade;
+	private Conta joaoCaixaEconomicaTrindade;
+	
+	@Before
+	public void configurar() throws Exception {
+		SistemaBancario sistemaBancario = new SistemaBancario();
+		caixaEconomica = sistemaBancario.criarBanco("Caixa Econômica", Moeda.BRL);
+		caixaEconomicaTrindade = caixaEconomica.criarAgencia("Trindade");
+		joaoCaixaEconomicaTrindade = caixaEconomicaTrindade.criarConta("João");
+	}
 
 	@Test
 	public void caixaEconomica() throws Exception {
