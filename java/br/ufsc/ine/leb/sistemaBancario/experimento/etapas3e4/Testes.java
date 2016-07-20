@@ -8,6 +8,7 @@ import org.junit.Test;
 import br.ufsc.ine.leb.sistemaBancario.Agencia;
 import br.ufsc.ine.leb.sistemaBancario.Banco;
 import br.ufsc.ine.leb.sistemaBancario.Conta;
+import br.ufsc.ine.leb.sistemaBancario.Dinheiro;
 import br.ufsc.ine.leb.sistemaBancario.Moeda;
 import br.ufsc.ine.leb.sistemaBancario.SistemaBancario;
 
@@ -21,7 +22,7 @@ public class Testes {
 	@Before
 	public void setup() {
 		sistema = new SistemaBancario();
-		banco = sistema.criarBanco("Banco do Brasil", Moeda.BRL);
+		banco = sistema.criarBanco("Banco do Brasil", Moeda.BRL, new Dinheiro(Moeda.BRL, 0,0));
 		centro = banco.criarAgencia("Centro");
 		maria = centro.criarConta("Maria");
 	}
